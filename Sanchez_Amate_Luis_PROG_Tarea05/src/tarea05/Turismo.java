@@ -66,4 +66,8 @@ public class Turismo {
     public boolean getDisponible(){
         return disponible;
     }
+    
+    public String toString(){
+        return String.format("Matricula: $s Marca: $s Modelo: $s Cilindrada: ",matricula, marca,modelo,cilindrada);
+    }
 }
