@@ -32,11 +32,38 @@ public class Turismo {
         
     }
     
+    public Turismo(Turismo turismo){
+        
+        matricula=turismo.getMatricula();
+        marca=turismo.getMarca();
+        modelo=turismo.getModelo();
+        cilindrada=turismo.getCilindrada();
+        
+    }
+    
     private boolean compruebaMatricula(String matricula) {
 		Pattern patron = Pattern.compile("[0-9]{4}[B-DF-HJ-NP-TV-Z]{3}");
 		Matcher emparejador = patron.matcher(matricula);
 		return emparejador.matches();
     }
-                
     
+    public String getMatricula(){
+        return matricula;
+    }
+    
+    public String getMarca(){
+        return marca;
+    }
+    
+    public String getModelo(){
+        return modelo;
+    }
+    
+    public int getCilindrada(){
+        return cilindrada;
+    }
+                
+    public boolean getDisponible(){
+        return disponible;
+    }
 }
