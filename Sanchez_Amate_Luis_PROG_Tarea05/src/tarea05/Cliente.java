@@ -85,7 +85,9 @@ public class Cliente {
 	}    
         
         
-        
+        public String toString(){
+                return String.format("Nombre: %s DNI: %s Direccion: %s Localidad: %s Codigo Postal: %s Identificador %s", nombre, dni, direccion, localidad, codigoPostal, identificador);
+        }
     
       
 }
