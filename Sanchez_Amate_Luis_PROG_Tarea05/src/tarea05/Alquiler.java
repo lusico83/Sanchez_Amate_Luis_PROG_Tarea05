@@ -54,14 +54,17 @@ public class Alquiler {
             else
                 return (int)diferenciaDias;
                 
-                
-		
+         	
 	}
         
         public double getPrecio(){  
             return dias*PRECIO_DIA+turismo.cilindrada/100;
         }
 	
+        public String toString() {
+		return String.format("Cliente: %s, Fecha entrada: %s, Días: %d Precio: %.2f Finalizado: %b%n\tVehiculo: %s", 
+				cliente,FORMATO_FECHA.format(fecha), dias, getPrecio(), turismo.disponible, turismo);
+	}
     
     
     
