@@ -13,6 +13,16 @@ public class Alquiler {
     private final SimpleDateFormat FORMATO_FECHA= new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private final double PRECIO_DIA = 30.0;
     
+    public Alquiler(Cliente cliente, Turismo turismo) {
+        
+        this.cliente= cliente;
+	this.turismo = turismo;
+	fecha = new Date();
+	dias = 0;
+        turismo.disponible=false;
+        
+	}
+    
     
     
 }
