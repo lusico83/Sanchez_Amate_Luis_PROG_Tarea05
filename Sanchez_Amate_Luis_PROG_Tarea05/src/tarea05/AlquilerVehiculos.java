@@ -79,7 +79,27 @@ public class AlquilerVehiculos {
 		else {
                     throw new ExcepcionAlquilerVehiculos("Este DNI no esta registrado");
 		}
-    }            
+    }
+    
+    
+    public Turismo getTurismo(String matricula){
+        for (int i=0;i<=MAX_CLIENTES;i++){
+            if (compruebaMatricula(matricula))
+                if (turismos[i].matricula.equals(matricula))
+                    throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI");
+                
+                else
+                    return turismos[i];
+        }
+        return null;
+    }
+    
+     private boolean compruebaMatricula(String matricula) {
+		Pattern patron = Pattern.compile("[0-9]{4}[B-DF-HJ-NP-TV-Z]{3}");
+		Matcher emparejador = patron.matcher(matricula);
+		return emparejador.matches();
+    }
+    
                 
     
 }
