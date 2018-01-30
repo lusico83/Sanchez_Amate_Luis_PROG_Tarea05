@@ -20,6 +20,18 @@ public class AlquilerVehiculos {
 	alquileres = new Alquiler[MAX_ALQUILERES];
     }
     
+    public Cliente[] getCliente() {
+		return clientes;
+	}
+	
+	public Turismo[] getTurismo() {
+		return turismos;
+	}
+	
+	public Alquiler[] getTrabajo() {
+		return alquileres;
+        }
+    
     public Cliente getCliente(String dni){
         for (int i=0;i<=MAX_CLIENTES;i++){
             if (compruebaDni(dni))
