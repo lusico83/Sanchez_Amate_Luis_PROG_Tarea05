@@ -23,10 +23,13 @@ public class AlquilerVehiculos {
     public Cliente getCliente(String dni){
         for (int i=0;i<=MAX_CLIENTES;i++){
             if (compruebaDni(dni))
-                return clientes[i];
-            else
-                return null;  
+                if (clientes[i].getDni().equals(dni))
+                    throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI");
+                
+                else
+                    return clientes[i];
         }
+        return null;
     }
     
     private boolean compruebaDni(String dni) {
@@ -34,5 +37,26 @@ public class AlquilerVehiculos {
 		Matcher emparejador = patron.matcher(dni);
 		return emparejador.matches();
 	}
+    
+    public void addCliente(Cliente cliente){
+        
+        int posicion = 0;
+	boolean posicionEncontrada = false;
+        
+            while (posicion < clientes.length && !posicionEncontrada) {
+                    if (clientes[posicion] == null)
+            		posicionEncontrada = true;
+                    else
+			if (clientes[posicion].getDni().equals(cliente.getDni()))
+				throw new ExcepcionAlquilerVehiculos("Este DNI ya esta en uso");
+			else
+                                posicion++;
+		}
+            if (posicionEncontrada)
+                    clientes[posicion] = cliente;
+            else
+		    throw new ExcepcionAlquilerVehiculos("No caben mas clientes");
+        
+    }
     
 }
