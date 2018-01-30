@@ -23,6 +23,23 @@ public class Alquiler {
         
 	}
     
+        public Cliente getCliente(){
+            return cliente;
+        }
+    
+        public Turismo getTurismo() {
+            return turismo;
+	}
+	
+	public Date getFecha() {
+            return fecha;
+	}
+	
+	public int getDias() {
+            return dias;
+	}
+	
+    
     
     
 }
