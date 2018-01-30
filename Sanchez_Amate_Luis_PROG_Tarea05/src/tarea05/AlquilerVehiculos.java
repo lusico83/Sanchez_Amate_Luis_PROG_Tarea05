@@ -86,7 +86,7 @@ public class AlquilerVehiculos {
         for (int i=0;i<=MAX_CLIENTES;i++){
             if (compruebaMatricula(matricula))
                 if (turismos[i].matricula.equals(matricula))
-                    throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI");
+                    throw new ExcepcionAlquilerVehiculos("Ya existe un turismo con esa matricula");
                 
                 else
                     return turismos[i];
@@ -100,6 +100,26 @@ public class AlquilerVehiculos {
 		return emparejador.matches();
     }
     
+     public void addTurismo(Turismo turismo){
+        
+        int posicion = 0;
+	boolean posicionEncontrada = false;
+        
+            while (posicion < turismos.length && !posicionEncontrada) {
+                    if (turismos[posicion] == null)
+            		posicionEncontrada = true;
+                    else
+			if (turismos[posicion].getMatricula().equals(turismo.getMatricula()))
+				throw new ExcepcionAlquilerVehiculos("Esta matricula ya esta en uso");
+			else
+                                posicion++;
+		}
+            if (posicionEncontrada)
+                    turismos[posicion]=turismo;
+            else
+		    throw new ExcepcionAlquilerVehiculos("No caben mas turismos");
+        
+    }
                 
     
 }
