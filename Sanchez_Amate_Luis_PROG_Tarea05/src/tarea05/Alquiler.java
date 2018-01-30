@@ -38,6 +38,25 @@ public class Alquiler {
 	public int getDias() {
             return dias;
 	}
+        
+        public void close() {
+		Date ahora = new Date();
+		dias = difDias(ahora, fecha);
+		turismo.disponible=true;
+	}
+        
+        private int difDias(Date fechaFin, Date fechaInicio) {
+            
+            long diferenciaDias = fechaFin.getTime() - fechaInicio.getTime();
+            
+            if (diferenciaDias==0)
+                return (int)diferenciaDias+1;
+            else
+                return (int)diferenciaDias;
+                
+                
+		
+	}
 	
     
     
