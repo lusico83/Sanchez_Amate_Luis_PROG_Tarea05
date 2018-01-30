@@ -142,6 +142,23 @@ public class AlquilerVehiculos {
                     throw new ExcepcionAlquilerVehiculos("Esta matricula no esta registrada");
 		}
     } 
-                
     
+    public void openAlquiler(Cliente cliente, Turismo turismo) {
+		int posicion = 0;
+		boolean posicionEncontrada = false;
+		while (posicion < alquileres.length && !posicionEncontrada) {
+			if (alquileres[posicion] == null)
+				posicionEncontrada = true;
+			else
+				if (alquileres[posicion].getTurismo().getMatricula().equals(turismo.getMatricula()) && 
+						!alquileres[posicion].getTurismo().disponible)
+					throw new ExcepcionAlquilerVehiculos("Este vehiculo esta alquilado");
+				else
+					posicion++;
+		}
+		if (posicionEncontrada)
+			alquileres[posicion] = new Alquiler(cliente, turismo);
+		else
+			throw new ExcepcionAlquilerVehiculos("No caben mas alquileres");
+    }
 }
