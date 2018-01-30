@@ -57,6 +57,10 @@ public class Alquiler {
                 
 		
 	}
+        
+        public double getPrecio(){  
+            return dias*PRECIO_DIA+turismo.cilindrada/100;
+        }
 	
     
     
