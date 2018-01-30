@@ -160,5 +160,24 @@ public class AlquilerVehiculos {
 			alquileres[posicion] = new Alquiler(cliente, turismo);
 		else
 			throw new ExcepcionAlquilerVehiculos("No caben mas alquileres");
+                
     }
-}
+    
+    public void closeAlquiler(Cliente cliente, Turismo turismo) {
+		int posicion = 0;
+		boolean encontrado = false;
+		while (posicion < alquileres.length && !encontrado) {
+			if (alquileres[posicion] != null && 
+					alquileres[posicion].getTurismo().getMatricula().equals(turismo.getMatricula()) &&
+					!alquileres[posicion].getTurismo().disponible &&
+                                        alquileres[posicion].getCliente().getDni().equals(cliente.getDni()))
+				encontrado = true;
+			else
+				posicion++;
+		}
+		if (encontrado)
+			alquileres[posicion].close();
+		else
+			throw new ExcepcionAlquilerVehiculos("Este cliente no ha alquilado este coche");
+    }
+}    
