@@ -12,6 +12,8 @@ public class Alquiler {
     private int dias;
     private final SimpleDateFormat FORMATO_FECHA= new SimpleDateFormat("dd/MM/yyyy HH:mm");
     private final double PRECIO_DIA = 30.0;
+    //Me he dado cuenta tarde de que la funcion getTime devuelve el resultado en milisegundos
+    private final int MILISEGUNDOS_DIA = 1000 * 60 * 60 * 24;
     
     public Alquiler(Cliente cliente, Turismo turismo) {
         
@@ -40,24 +42,19 @@ public class Alquiler {
 	}
         
         public void close() {
-		Date ahora = new Date();
-		dias = difDias(ahora, fecha);
-		turismo.disponible=true;
+            Date ahora = new Date();
+            dias = difDias(ahora, fecha);
+            turismo.disponible=true;
 	}
         
         private int difDias(Date fechaFin, Date fechaInicio) {
-            
-            long diferenciaDias = fechaFin.getTime() - fechaInicio.getTime();
-            
-            if (diferenciaDias==0)
-                return (int)diferenciaDias+1;
-            else
-                return (int)diferenciaDias;
-                
+            long milisegundos = fechaFin.getTime() - fechaInicio.getTime();
+            long dias = milisegundos / MILISEGUNDOS_DIA;
+            return (int) dias + 1;    
          	
 	}
         
-        public double getPrecio(){  
+        public double getPrecio(){ 
             return dias*PRECIO_DIA+turismo.cilindrada/100;
         }
 	

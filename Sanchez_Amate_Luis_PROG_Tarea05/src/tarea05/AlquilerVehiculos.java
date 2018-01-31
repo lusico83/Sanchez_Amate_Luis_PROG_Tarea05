@@ -33,22 +33,21 @@ public class AlquilerVehiculos {
         }
     
     public Cliente getCliente(String dni){
-        for (int i=0;i<=MAX_CLIENTES;i++){
-            if (compruebaDni(dni))
-                if (clientes[i].getDni().equals(dni))
-                    throw new ExcepcionAlquilerVehiculos("Ya existe un cliente con ese DNI");
-                
-                else
-                    return clientes[i];
-        }
-        return null;
-    }
-    
-    private boolean compruebaDni(String dni) {
-		Pattern patron = Pattern.compile("[0-9]{8}[A-Z]");
-		Matcher emparejador = patron.matcher(dni);
-		return emparejador.matches();
+        int posicion = 0;
+	boolean encontrado = false;
+        
+            while (posicion < clientes.length && !encontrado) {
+		if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))
+			encontrado = true;
+		else
+			posicion++;
+		}
+		if (encontrado)
+			return clientes[posicion];
+		else
+			return null;
 	}
+    
     
     public void addCliente(Cliente cliente){
         
@@ -95,15 +94,21 @@ public class AlquilerVehiculos {
     
     
     public Turismo getTurismo(String matricula){
-        for (int i=0;i<=MAX_CLIENTES;i++){
-            if (compruebaMatricula(matricula))
-                if (turismos[i].matricula.equals(matricula))
-                    throw new ExcepcionAlquilerVehiculos("Ya existe un turismo con esa matricula");
+                int posicion = 0;
+		boolean posicionEncontrada = false;
                 
-                else
-                    return turismos[i];
-        }
-        return null;
+		while (posicion < turismos.length && !posicionEncontrada) {
+                    
+                        if (turismos[posicion] != null && turismos[posicion].getMatricula().equals(matricula))
+                            posicionEncontrada = true;
+			else
+                            posicion++;
+		}
+		if (posicionEncontrada)
+			return turismos[posicion];
+		else
+			return null;
+                
     }
     
      private boolean compruebaMatricula(String matricula) {
@@ -126,10 +131,11 @@ public class AlquilerVehiculos {
 			else
                                 posicion++;
 		}
+
             if (posicionEncontrada)
                     turismos[posicion]=turismo;
             else
-		    throw new ExcepcionAlquilerVehiculos("No caben mas turismos");
+		    throw new ExcepcionAlquilerVehiculos("No caben mas clientes");
         
     }
      
@@ -162,9 +168,10 @@ public class AlquilerVehiculos {
 			if (alquileres[posicion] == null)
 				posicionEncontrada = true;
 			else
-				if (alquileres[posicion].getTurismo().getMatricula().equals(turismo.getMatricula()) && 
-						!alquileres[posicion].getTurismo().disponible)
-					throw new ExcepcionAlquilerVehiculos("Este vehiculo esta alquilado");
+				if (alquileres[posicion].getTurismo().getMatricula().equals(turismo.getMatricula()) && !alquileres[posicion].getTurismo().disponible){
+                                posicionEncontrada=true;   
+                                throw new ExcepcionAlquilerVehiculos("Este vehiculo esta alquilado");
+                                }
 				else
 					posicion++;
 		}

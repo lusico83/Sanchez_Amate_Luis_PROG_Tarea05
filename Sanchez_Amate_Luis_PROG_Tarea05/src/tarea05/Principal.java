@@ -13,32 +13,55 @@ public class Principal {
     
     public static void main(String[] args) {
         
+
+        //Creamos un array de AlquilerVehiculos con los maximos de campos que establecimos en esa clase
         AlquilerVehiculos misAlquileres=new AlquilerVehiculos();
+        
+        //Precargamos 3 clientes y 3 turismos para poder hacer pruebas mas agilmente
+        Cliente cliente1 = new Cliente("Luis", "11111111A", "Calle Granada", "Almería", "04008");
+	Cliente cliente2 = new Cliente("Pepe", "22222222B", "Calle Saturno", "Huércal de Almería", "04230");
+        Cliente cliente3 = new Cliente("Maria", "33333333C", "Calle Zacatin", "Bentarique", "04569");
+	misAlquileres.addCliente(cliente1);
+	misAlquileres.addCliente(cliente2);
+        misAlquileres.addCliente(cliente3);
+	Turismo turismo1 = new Turismo ("2222BBB", "Seat", "Ibiza",1900);
+	Turismo turismo2 = new Turismo("3333CCC", "Mercedes", "ClaseC", 3200);
+        Turismo turismo3 = new Turismo("4444DDD", "Lamborghini", "Diablo", 12000);
+	misAlquileres.addTurismo(turismo1);
+	misAlquileres.addTurismo(turismo2);
+        misAlquileres.addTurismo(turismo3);
+        
+        
+        //Menu para elegir opciones
         int opcion;
 		do {
-			System.out.println("Alquiler de Vehiculos");
-			System.out.println("---------------");
+                        System.out.println("************************");
+			System.out.println("   ALQUILERES TUCARRO  ");
+			System.out.println("************************");
 			System.out.println("1.- Añadir cliente");
 			System.out.println("2.- Borrar cliente");
 			System.out.println("3.- Listar clientes");
-			System.out.println("5.- Añadir vehículo");
-			System.out.println("6.- Borrar vehículo");
-			System.out.println("8.- Listar vehículos");
-			System.out.println("9.- Abrir trabajo");
-			System.out.println("10.- Cerrar trabajo");
-			System.out.println("12.- Listar trabajos");
+			System.out.println("4.- Añadir turismo");
+			System.out.println("5.- Borrar turismoo");
+			System.out.println("6.- Listar turismos");
+			System.out.println("7.- Abrir alquiler");
+			System.out.println("8.- Cerrar alquiler");
+			System.out.println("9.- Listar alquileres");
 			System.out.println("0.- Salir");
 			
+                        //validamos que la opcion este entre 0 y 9
 			do {
-				System.out.print("\nElige una opción (0-11): ");
+				System.out.print("\nElige una de estas opciones (0-9): ");
 				opcion = Entrada.entero();
 			} while (opcion < 0 || opcion > 12);
 			switch (opcion) {
+                            
+                            
 				case 1:
 					Cliente nuevoCliente = null;
 					do {
 						System.out.println("\nAñadir cliente");
-						System.out.println("--------------");
+						System.out.println("*********************");
 						System.out.print("Nombre: ");
 						String nombre = Entrada.cadena();
 						System.out.print("DNI: ");
@@ -65,7 +88,7 @@ public class Principal {
 					
 				case 2:
 					System.out.println("\nBorrar cliente");
-					System.out.println("--------------");
+					System.out.println("********************");
 					System.out.print("\nIntroduce el DNI del cliente a borrar: ");
 					String dniBorrar = Entrada.cadena();
 					try {
@@ -78,128 +101,111 @@ public class Principal {
 
 				case 3:
 					System.out.println("\nListado de clientes");
-					System.out.println("-------------------");
-					for (int i=0;i<=20;i++)
-                                        {
-						if (misAlquileres != null)
+					System.out.println("*********************");
+					for (Cliente cliente: misAlquileres.getCliente()) {
+						if (cliente != null)
 							System.out.println(cliente);
 					}
 					System.out.println("");
 					break;
-				case 5:
-					Vehiculo nuevoVehiculo = null;
-					System.out.println("\nAñadir vehículo");
-					System.out.println("---------------");
-					System.out.println("DNI del propietario: ");
-					String dniPropietario = Entrada.cadena();
-					Cliente propietario = miTaller.buscarCliente(dniPropietario);
+				case 4:
+					Turismo nuevoTurismo=  null;
+					System.out.println("\nAñadir turismo");
+					System.out.println("********************");
 					System.out.print("Matrícula: ");
 					String matricula = Entrada.cadena();
 					System.out.print("Marca: ");
 					String marca = Entrada.cadena();
 					System.out.print("Modelo: ");
 					String modelo = Entrada.cadena();
-					System.out.println("Color: ");
-					String color = Entrada.cadena();
 					System.out.print("Cilindrada: ");
 					int cilindrada = Entrada.entero();
 					try {
-						nuevoVehiculo = new Vehiculo(propietario, matricula, marca, modelo, color, cilindrada);
-						miTaller.anadirVehiculo(nuevoVehiculo);
-					} catch (ExcepcionTallerMecanico e) {
+						nuevoTurismo = new Turismo(matricula, marca, modelo, cilindrada);
+						misAlquileres.addTurismo(nuevoTurismo);
+					} catch (ExcepcionAlquilerVehiculos e) {
 						System.out.printf("ERROR: %s%n%n", e.getMessage());
 					}
 					break;
-				case 6:
-					System.out.println("\nBorrar vehículo");
-					System.out.println("---------------");
-					System.out.print("\nIntroduce la matrícula del vehículo a borrar: ");
+				case 5:
+					System.out.println("\nBorrar turismo");
+					System.out.println("********************");
+					System.out.print("\nIntroduce la matrícula del turismo a borrar: ");
 					String matriculaBorrar = Entrada.cadena();
 					try {
-						miTaller.borrarVehiculo(matriculaBorrar);
+						misAlquileres.borrarTurismo(matriculaBorrar);
 						System.out.println("Turismo borrado satisfactoriamente\n");
-					} catch (ExcepcionTallerMecanico e) {
+					} catch (ExcepcionAlquilerVehiculos e) {
 						System.out.printf("ERROR: %s%n%n", e.getMessage());
 					}
 					break;
-				case 7:
-					System.out.println("\nBuscar vehículo");
-					System.out.println("---------------");
-					System.out.print("\nIntroduce la matrícula del vehículo a buscar: ");
-					String matriculaBuscar = Entrada.cadena();
-					Vehiculo vehiculoBuscado = miTaller.buscarVehiculo(matriculaBuscar);
-					System.out.print("\nResultado de la búsqueda: ");
-					mensaje = (vehiculoBuscado != null) ? vehiculoBuscado.toString() : "El vehículo no existe";
-					System.out.printf("%s%n%n", mensaje);
-					break;
-				case 8:
-					System.out.println("\nListado de vehículos");
-					System.out.println("--------------------");
-					for (Vehiculo vehiculo: miTaller.getVehiculos()) {
-						if (vehiculo != null)
-							System.out.println(vehiculo);
+                                        
+        			case 6:
+					System.out.println("\nListado de turismos");
+					System.out.println("*********************");
+					for (Turismo turismo: misAlquileres.getTurismo()) {
+						if (turismo != null)
+							System.out.println(turismo);
 					}
 					System.out.println("");
 					break;
-				case 9:
-					System.out.println("\nAbrir trabajo");
+				case 7:
+					System.out.println("\nNuevo Alquiler");
 					System.out.println("-------------");
-					System.out.print("\nIntroduce la matrícula del vehículo: ");
-					matriculaBuscar = Entrada.cadena();
-					vehiculoBuscado = miTaller.buscarVehiculo(matriculaBuscar);
+                                        System.out.print("\nIntroduce el DNI del cliente: ");
+                                        String dniBuscar = Entrada.cadena();
+                                        Cliente clienteBuscado = misAlquileres.getCliente(dniBuscar);
+                                        
+                                        if (clienteBuscado == null)
+                                            System.out.println("ERROR: No existe un cliente con ese DNI\n");
+                                        
+                                        
+					System.out.print("\nIntroduce la matrícula del turismo: ");
+					String matriculaBuscar = Entrada.cadena();
+					Turismo vehiculoBuscado = misAlquileres.getTurismo(matriculaBuscar);
+                                        
 					if (vehiculoBuscado == null)
-						System.out.println("ERROR: No existe un vehículo con dicha matrícula\n");
-					else {
-							try {
-								miTaller.abrirTrabajo(vehiculoBuscado);
-								System.out.println("Trabajo abierto satisfactoriamente\n");
-							} catch (ExcepcionTallerMecanico e) {
-								System.out.printf("ERROR: %s%n%n", e.getMessage());
-							}
-					}
+                                            System.out.println("ERROR: No existe un turismo con dicha matrícula\n");
+                                        
+						
+                                        try {
+                                            misAlquileres.openAlquiler(clienteBuscado, vehiculoBuscado);
+						System.out.println("Alquiler dado de alta\n");
+                                            } 
+                                        catch (ExcepcionAlquilerVehiculos e) {
+						System.out.printf("ERROR: %s%n%n", e.getMessage());
+                                            }
+					
 					break;
-				case 10:
-					System.out.println("\nCerrar trabajo");
+				case 8:
+					System.out.println("\nCerrar alquiler");
 					System.out.println("--------------");
-					System.out.print("\nIntroduce la matrícula del vehículo: ");
+                                        System.out.print("\nIntroduce el DNI del cliente: ");
+					dniBuscar = Entrada.cadena();
+					clienteBuscado = misAlquileres.getCliente(dniBuscar);
+                                        if (clienteBuscado == null)
+                                            System.out.println("ERROR: No existe un cliente con ese DNI\n");
+					System.out.print("\nIntroduce la matrícula del turismo: ");
 					matriculaBuscar = Entrada.cadena();
-					vehiculoBuscado = miTaller.buscarVehiculo(matriculaBuscar);
+					vehiculoBuscado =misAlquileres.getTurismo(matriculaBuscar);
 					if (vehiculoBuscado == null)
-						System.out.println("ERROR: No existe un vehículo con dicha matrícula\n");
-					else {
-						try {
-							miTaller.cerrarTrabajo(vehiculoBuscado);
-							System.out.println("Trabajo cerrado satisfactoriamente");
-						} catch (ExcepcionTallerMecanico e) {
-							System.out.printf("ERROR: %s%n%n", e.getMessage());
-						}
+						System.out.println("ERROR: No existe un turismo con dicha matrícula\n");
+                                        
+                                        
+					try {
+                                                misAlquileres.closeAlquiler(clienteBuscado,vehiculoBuscado);
+						System.out.println("Alquiler dado de baja");
+					} catch (ExcepcionAlquilerVehiculos e) {
+						System.out.printf("ERROR: %s%n%n", e.getMessage());
 					}
 					break;
-				case 11:
-					System.out.println("\nAñadir horas a un trabajo");
-					System.out.println("--------------");
-					System.out.print("\nIntroduce la matrícula del vehículo: ");
-					matriculaBuscar = Entrada.cadena();
-					vehiculoBuscado = miTaller.buscarVehiculo(matriculaBuscar);
-					if (vehiculoBuscado == null)
-						System.out.println("ERROR: No existe un vehículo con dicha matrícula\n");
-					else {
-						System.out.println("Introduce el número de horas a añadir: ");
-						int horas = Entrada.entero();
-						try {
-							miTaller.anadirHorasTrabajo(vehiculoBuscado, horas);
-							System.out.println("Horas añadidas satisfactoriamente");
-						} catch (ExcepcionTallerMecanico e) {
-							System.out.printf("ERROR: %s%n%n", e.getMessage());
-						}
-					}
-					break;
-				case 12:
+				
+				case 9:
 					System.out.println("\nListado de trabajos");
 					System.out.println("---------------------");
-					for (Trabajo trabajo: miTaller.getTrabajos()) {
-						if (trabajo != null)
-							System.out.println(trabajo);
+					for (Alquiler alquiler: misAlquileres.getTrabajo()) {
+						if (alquiler != null)
+							System.out.println(alquiler);
 					}
 					System.out.println("");
 					break;
