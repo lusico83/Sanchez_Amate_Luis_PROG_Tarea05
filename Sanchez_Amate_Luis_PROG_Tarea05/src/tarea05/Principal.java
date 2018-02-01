@@ -155,26 +155,32 @@ public class Principal {
                                         System.out.print("\nIntroduce el DNI del cliente: ");
                                         String dniBuscar = Entrada.cadena();
                                         Cliente clienteBuscado = misAlquileres.getCliente(dniBuscar);
-                                        
                                         if (clienteBuscado == null)
                                             System.out.println("ERROR: No existe un cliente con ese DNI\n");
-                                        
                                         
 					System.out.print("\nIntroduce la matrícula del turismo: ");
 					String matriculaBuscar = Entrada.cadena();
 					Turismo vehiculoBuscado = misAlquileres.getTurismo(matriculaBuscar);
-                                        
-					if (vehiculoBuscado == null)
+                                        if (vehiculoBuscado == null)
                                             System.out.println("ERROR: No existe un turismo con dicha matrícula\n");
                                         
-						
-                                        try {
-                                            misAlquileres.openAlquiler(clienteBuscado, vehiculoBuscado);
-						System.out.println("Alquiler dado de alta\n");
-                                            } 
-                                        catch (ExcepcionAlquilerVehiculos e) {
-						System.out.printf("ERROR: %s%n%n", e.getMessage());
+
+                                        
+                                        if (clienteBuscado == null || vehiculoBuscado == null)
+                                            System.out.println("ERROR: No se puede crear el alquiler");
+                                        
+                                        else{
+                        
+                                            try {
+                                                misAlquileres.openAlquiler(clienteBuscado, vehiculoBuscado);
+                                                System.out.println("Alquiler dado de alta\n");
                                             }
+                                            catch (ExcepcionAlquilerVehiculos e) {
+                                                System.out.printf("ERROR: %s%n%n", e.getMessage());
+                                            }
+                                        }
+                                        
+                        
 					
 					break;
 				case 8:
@@ -191,13 +197,17 @@ public class Principal {
 					if (vehiculoBuscado == null)
 						System.out.println("ERROR: No existe un turismo con dicha matrícula\n");
                                         
+                                        if (clienteBuscado == null || vehiculoBuscado == null)
+                                            System.out.println("ERROR: No existe este alquiler");
                                         
+                                        else{
 					try {
                                                 misAlquileres.closeAlquiler(clienteBuscado,vehiculoBuscado);
 						System.out.println("Alquiler dado de baja");
 					} catch (ExcepcionAlquilerVehiculos e) {
 						System.out.printf("ERROR: %s%n%n", e.getMessage());
 					}
+                                        }
 					break;
 				
 				case 9:
