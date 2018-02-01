@@ -12,6 +12,8 @@ public class Turismo {
     public int cilindrada;
     public boolean disponible;
     
+    //Constructor con parametros
+    
     
     public Turismo(String matricula, String marca, String modelo, int cilindrada){
         
@@ -32,6 +34,8 @@ public class Turismo {
         
     }
     
+    //Constructor copia
+    
     public Turismo(Turismo turismo){
         
         matricula=turismo.getMatricula();
@@ -40,12 +44,16 @@ public class Turismo {
         cilindrada=turismo.getCilindrada();
         
     }
+   
+    //Metodo para comprobar matriculas
     
     private boolean compruebaMatricula(String matricula) {
 		Pattern patron = Pattern.compile("[0-9]{4}[B-DF-HJ-NP-TV-Z]{3}");
 		Matcher emparejador = patron.matcher(matricula);
 		return emparejador.matches();
     }
+    
+    //Metodos Get y toString
     
     public String getMatricula(){
         return matricula;

@@ -33,6 +33,9 @@ public class Principal {
         
         
         //Menu para elegir opciones
+        //desde cada una de las opciones llamamos a los metodos que hemos ido creando para todas las funciones que 
+        //queremos realizar y lanzando excepciones cuando corresponda
+        
         int opcion;
 		do {
                         System.out.println("************************");

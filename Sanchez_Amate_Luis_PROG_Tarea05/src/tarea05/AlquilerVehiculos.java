@@ -13,24 +13,27 @@ public class AlquilerVehiculos {
     private final int MAX_CLIENTES = 20;
     private final int MAX_ALQUILERES = 20;
     
-    
+    //Constructor del objeto AlquilerVehiculos que es un array de tres tipos de objetos
     public AlquilerVehiculos() {
 	clientes = new Cliente[MAX_CLIENTES];
 	turismos = new Turismo[MAX_TURISMOS];
 	alquileres = new Alquiler[MAX_ALQUILERES];
     }
-    
+    //Metodos get
     public Cliente[] getCliente() {
-		return clientes;
-	}
+	return clientes;
+    }
 	
-	public Turismo[] getTurismo() {
-		return turismos;
-	}
+    public Turismo[] getTurismo() {
+	return turismos;
+    }
 	
-	public Alquiler[] getTrabajo() {
-		return alquileres;
-        }
+    public Alquiler[] getTrabajo() {
+        return alquileres;
+    }
+    
+    //Otro metodo getCliente pero este coge como parametro un DNI y hacemos una busqueda del array por si existe
+    //en caso de existir, devuelve el contenido de cliente con ese DNI, sino, null
     
     public Cliente getCliente(String dni){
         int posicion = 0;
@@ -48,7 +51,7 @@ public class AlquilerVehiculos {
 			return null;
 	}
     
-    
+    //Metodo para añadir un cliente al primer hueco libre(si quedan)del array
     public void addCliente(Cliente cliente){
         
         int posicion = 0;
@@ -69,6 +72,10 @@ public class AlquilerVehiculos {
 		    throw new ExcepcionAlquilerVehiculos("No caben mas clientes");
         
     }
+    
+    //Metodo que pide un dni como parametro y recorre el array buscando coincidencias de DNI
+    //y cuando encuentra una coincidencia, deslaza todos los clientes un hueco hacia la izquierda
+    //y elimina el cliente coincidente
     
     public void borrarCliente(String dni) {
             int posicion = 0;
@@ -92,6 +99,7 @@ public class AlquilerVehiculos {
 		}
     }
     
+    //Muestra los datos de un cliente con una matricula que coge como parametro
     
     public Turismo getTurismo(String matricula){
                 int posicion = 0;
@@ -110,12 +118,8 @@ public class AlquilerVehiculos {
 			return null;
                 
     }
-    
-     private boolean compruebaMatricula(String matricula) {
-		Pattern patron = Pattern.compile("[0-9]{4}[B-DF-HJ-NP-TV-Z]{3}");
-		Matcher emparejador = patron.matcher(matricula);
-		return emparejador.matches();
-    }
+
+    //Metodo que funciona igual que el de addCliente pero con turismos, pero haciendo busquedas de matricula
     
      public void addTurismo(Turismo turismo){
         
@@ -138,6 +142,8 @@ public class AlquilerVehiculos {
 		    throw new ExcepcionAlquilerVehiculos("No caben mas clientes");
         
     }
+    
+    //Se comporta igual que borrarCliente pero con matriculas en lugar de DNI
      
     public void borrarTurismo(String matricula) {
             int posicion = 0;
@@ -161,6 +167,10 @@ public class AlquilerVehiculos {
 		}
     } 
     
+    //En este caso vamos recorriendo el array buscando si la matricula ya esta alquilada (disponible=false)
+    //En caso contrario,buscaremos el primer hueco vacio en el array alquileres y si queda alguno disponible
+    //ya podemos guardar los datos del cliente y el coche
+    
     public void openAlquiler(Cliente cliente, Turismo turismo) {
 		int posicion = 0;
 		boolean posicionEncontrada = false;
@@ -181,6 +191,9 @@ public class AlquilerVehiculos {
 			throw new ExcepcionAlquilerVehiculos("No caben mas alquileres");
                 
     }
+    //Vamos recorriendo el array de alquileres y comprobando que haya alguna coincidencia con el cliente y turismo aportados
+    //comparando matriculas, dni y que el coche no este disponible
+    //cuando lo encontremos llamamos al metodo close para que destruya esa posicion del array
     
     public void closeAlquiler(Cliente cliente, Turismo turismo) {
 		int posicion = 0;

@@ -13,6 +13,8 @@ public class Cliente {
     private String codigoPostal;
     private int identificador;
     private static int numClientes=0;
+  
+  //Constructor copia
     
   public Cliente(Cliente cliente){
         
@@ -25,6 +27,8 @@ public class Cliente {
         
     }
     
+  //Constructor con parametros
+  
     public Cliente(String nombre, String dni, String direccion, String localidad, String codigoPostal){
         
         this.nombre=nombre;
@@ -47,19 +51,22 @@ public class Cliente {
         identificador=numClientes;
         
     }
-        
+        // Metodo que comprueba con una expresion regular la validez de un DNI
         private boolean compruebaDni(String dni) {
 		Pattern patron = Pattern.compile("[0-9]{8}[A-Z]");
 		Matcher emparejador = patron.matcher(dni);
 		return emparejador.matches();
 	}
 	
+        //Metodo que comprueba la validez de un CP
 	private boolean compruebaCodigoPostal(String codigoPostal) {
 		Pattern patron = Pattern.compile("[0-9]{5}");
 		Matcher emparejador = patron.matcher(codigoPostal);
 		return emparejador.matches();
 	}
 	
+        //Metodos Get y toString
+        
 	public String getNombre() {
 		return nombre;
 	}

@@ -15,6 +15,9 @@ public class Alquiler {
     //Me he dado cuenta tarde de que la funcion getTime devuelve el resultado en milisegundos
     private final int MILISEGUNDOS_DIA = 1000 * 60 * 60 * 24;
     
+    
+    //Constructor que coge como parametros dos objetos
+    
     public Alquiler(Cliente cliente, Turismo turismo) {
         
         this.cliente= cliente;
@@ -41,6 +44,8 @@ public class Alquiler {
             return dias;
 	}
         
+        //Metodo que calcula la diferencia de dias entre la fecha de devolucion del coche y la que se inicio el alquiler
+        //  el cual hace una llamada a difDias para calcular el numero de dias(se cobra un minimo de un dia)
         public void close() {
             Date ahora = new Date();
             dias = difDias(ahora, fecha);
@@ -53,6 +58,7 @@ public class Alquiler {
             return (int) dias + 1;    
          	
 	}
+        //Calculo del precio
         
         public double getPrecio(){ 
             return dias*PRECIO_DIA+turismo.cilindrada/100;
