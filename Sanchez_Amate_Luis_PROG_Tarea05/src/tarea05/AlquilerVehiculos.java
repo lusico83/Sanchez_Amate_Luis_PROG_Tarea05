@@ -40,16 +40,18 @@ public class AlquilerVehiculos {
 	boolean encontrado = false;
         
             while (posicion < clientes.length && !encontrado) {
+                
 		if (clientes[posicion] != null && clientes[posicion].getDni().equals(dni))
-			encontrado = true;
+                    encontrado = true;
 		else
-			posicion++;
+                    posicion++;
 		}
 		if (encontrado)
-			return clientes[posicion];
+                    return clientes[posicion];
 		else
-			return null;
-	}
+                    return null;
+                
+    }
     
     //Metodo para añadir un cliente al primer hueco libre(si quedan)del array
     public void addCliente(Cliente cliente){
@@ -102,20 +104,20 @@ public class AlquilerVehiculos {
     //Muestra los datos de un cliente con una matricula que coge como parametro
     
     public Turismo getTurismo(String matricula){
-                int posicion = 0;
-		boolean posicionEncontrada = false;
+        int posicion = 0;
+	boolean posicionEncontrada = false;
                 
-		while (posicion < turismos.length && !posicionEncontrada) {
+            while (posicion < turismos.length && !posicionEncontrada) {
                     
-                        if (turismos[posicion] != null && turismos[posicion].getMatricula().equals(matricula))
-                            posicionEncontrada = true;
-			else
-                            posicion++;
+                if (turismos[posicion] != null && turismos[posicion].getMatricula().equals(matricula))
+                    posicionEncontrada = true;
+                else
+                    posicion++;
 		}
 		if (posicionEncontrada)
-			return turismos[posicion];
+                    return turismos[posicion];
 		else
-			return null;
+                    return null;
                 
     }
 
@@ -201,7 +203,7 @@ public class AlquilerVehiculos {
 		while (posicion < alquileres.length && !encontrado) {
 			if (alquileres[posicion] != null && 
 					alquileres[posicion].getTurismo().getMatricula().equals(turismo.getMatricula()) &&
-					!alquileres[posicion].getTurismo().disponible &&
+					alquileres[posicion].getDias()==0 &&
                                         alquileres[posicion].getCliente().getDni().equals(cliente.getDni()))
 				encontrado = true;
 			else
